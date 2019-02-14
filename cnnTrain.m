@@ -7,10 +7,10 @@ numFilters = 15;
 poolDim = 2; 
 hiddenDim = 5;
 
-addpath '/Users/wangkaihong/Documents/MNIST hand writing data';
-images = loadMNISTImages('/Users/wangkaihong/Documents/MNIST hand writing data/train-images-idx3-ubyte');
+addpath '';
+images = loadMNISTImages('');
 images = reshape(images,imageDim,imageDim,[]);
-labels = loadMNISTLabels('/Users/wangkaihong/Documents/MNIST hand writing data/train-labels-idx1-ubyte');
+labels = loadMNISTLabels('');
 labels(labels==0) = 10;
 
 theta = cnnInitParams(imageDim,filterDim,numFilters,poolDim,numClasses,hiddenDim);
@@ -25,9 +25,9 @@ options.momentum = .95;
 opttheta = minFuncSGD(@(x,y,z) cnnCost(x,y,z,numClasses,filterDim,numFilters,poolDim,hiddenDim),theta,images,labels,options);
 
 
-testImages = loadMNISTImages('/Users/wangkaihong/Documents/MNIST hand writing data/t10k-images-idx3-ubyte');
+testImages = loadMNISTImages('');
 testImages = reshape(testImages,imageDim,imageDim,[]);
-testLabels = loadMNISTLabels('/Users/wangkaihong/Documents/MNIST hand writing data/t10k-labels-idx1-ubyte');
+testLabels = loadMNISTLabels('');
 testLabels(testLabels==0) = 10; 
 
 [cost,grad,preds]=cnnCost(opttheta,testImages,testLabels,numClasses,...
