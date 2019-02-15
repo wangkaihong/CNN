@@ -32,11 +32,10 @@ activationsPooled = cnnPool(poolDim, activations);
 activationsPooled = reshape(activationsPooled,[],numImages);
 
 probs = zeros(numClasses,numImages);
-hidden = Wh * activationsPooled;
-hidden = sigmoid(bsxfun(@plus,hidden,bh));
+hidden = bsxfun(@plus,Wh * activationsPooled,bh);
+hidden = sigmoid(hidden);
 
-z = Wd*hidden;
-z = bsxfun(@plus,z,bd);
+z = bsxfun(@plus,Wd*hidden,bd);
 
 z = bsxfun(@minus,z,max(z,[],1));
 z = exp(z);
